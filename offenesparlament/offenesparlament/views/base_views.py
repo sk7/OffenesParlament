@@ -4,6 +4,7 @@ from op_scraper.models import Person
 from op_scraper.models import Law
 from op_scraper.models import LegislativePeriod
 from op_scraper.models import Keyword
+from op_scraper.models import Comittee
 from django.db.models import Count, Max
 
 import datetime
@@ -103,6 +104,15 @@ def keyword_detail(request, keyword):
         .order_by('-last_update')
     context = {'keyword': keyword, 'laws': laws}
     return render(request, 'keyword_detail.html', context)
+
+
+def comittee_detail(request, parl_id, ggp):
+    parl_id_restored = '({})'.format(
+        parl_id.replace('-', '/').replace('_', '-'))
+    llp = _ensure_ggp_is_set(request, ggp)
+    comittee = Comittee.objects.get(parl_id=parl_id_restored, legislative_period=llp)
+    context = {'comittee': comittee}
+    return render(request, 'comittee_detail.html', context)
 
 
 def _ensure_ggp_is_set(request, ggp_roman_numeral=None):

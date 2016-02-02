@@ -1,0 +1,24 @@
+{% extends "base_content.html" %}
+
+{% load django_bootstrap_breadcrumbs %}
+{% block breadcrumbs %}
+  {{ block.super }}
+  {% breadcrumb "Ausschüsse" "comittees_list" %}
+  {% breadcrumb comittee.name "comittee_detail" %}
+{% endblock %}
+
+{% block ggp_selector %}{% endblock %}
+
+{% block title %}{{ comittee.name }}{% endblock %}
+
+{% block content %}
+<h1>{{ comittee.name }} {{ comittee.parl_id }}</h1>
+
+
+
+
+{% load jsonify %}
+<script>
+  var OFFPARL_DATA_SEARCH_TYPE = 'Ausschüsse';
+</script>
+{% endblock %}

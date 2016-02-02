@@ -24,6 +24,8 @@ urlpatterns = patterns(
     url(r'^schlagworte/(?P<ggp>[XVIMCD]{1,})/$', base_views.keyword_list_with_ggp, name='keyword_list_with_ggp'),
     url(r'^schlagworte/(?P<keyword>.+)/$',
         base_views.keyword_detail, name='keyword_detail'),
+    url(r'^ausschuesse/(?P<ggp>[XVIMCD]{1,})/(?P<parl_id>.{1,60})/$',
+        base_views.comittee_detail, name='comittee_detail'),
 
     # Search Urls
     url(r'^search/?$',
